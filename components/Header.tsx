@@ -15,15 +15,19 @@ const Header = async () => {
         <Logo />
         <div className="flex-1 flex items-center justify-end space-x-4"></div>
 
-        {session && (
+        {session ? (
           <>
             <Link href={"/chat"} prefetch={false}>
-           <MessagesSquareIcon/>
+           <MessagesSquareIcon className="text-black dark:text-white"/>
             </Link>
           </>
+        ) : (
+          <Link href='/pricing' prefetch={false}>
+            Pricing
+          </Link>
         )}
         <DarkModeToggle />
-        <UserButton />
+        <UserButton  session={session}/>
       </nav>
     </header>
   );

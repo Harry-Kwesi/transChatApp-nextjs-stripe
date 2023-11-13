@@ -7,14 +7,14 @@ function UserAvatar({
   image,
   className,
 }: {
-  name: string;
-  image: string;
+  name?: string | null;
+  image?: string | null;
   className: string;
 }) {
   return (
     <Avatar className={cn("bg-white text-black", className)}>
       {image && (
-        <Image src={image} width={500} height={500} alt={name} className="" />
+        <Image src={image} width={500} height={500} alt={name || "user name"} className="" />
       )}
       <AvatarFallback
         delayMs={1000}
