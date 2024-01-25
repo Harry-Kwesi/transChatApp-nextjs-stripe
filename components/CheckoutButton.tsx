@@ -3,11 +3,10 @@
 import { useSession } from "next-auth/react"
 
 function CheckoutButton() {
-
-  const {data:session} = useSession();
+const {data:session} = useSession();
 
   const createCheckoutSession = async () => {
-
+      if(session) return;
   }
 
   return (
