@@ -7,7 +7,7 @@ const Logo = () => {
   return (
     <>
       <Link href="/" prefetch={false} className="oveflow-hidden">
-      <div className="flex items-center w-52 h-4 mt-10 ">
+      <div className="flex items-center w-52 h-4 mt-16 ">
       <AspectRatio ratio={14 / 9}
       className="flex items-center justify-between"
       >
