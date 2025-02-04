@@ -16,10 +16,12 @@ const Logo = () => {
   </AspectRatio>
         </div>
         </Link> */}
+        <Link href="/" prefetch={false} className="oveflow-hidden">   
           <div className="flex items-center">
               <MessageSquare className="w-8 h-8 text-blue-600" />
               <span className="ml-2 text-xl font-bold">TransChat</span>
           </div>
+        </Link>
     </>
   );
 };
