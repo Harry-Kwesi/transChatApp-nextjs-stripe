@@ -13,14 +13,15 @@ import { Button } from "./ui/button";
 import { signIn, signOut } from "next-auth/react";
 
 export default function UserButton({ session }: { session: Session | null }) {
-
+      if (!session) {
+        return (
+          <Button variant="outline" onClick={() => signIn()}>
+            Sign In
+          </Button>
+        );
+      }
+    
   return (
-    <>
-     {!session ? (
-        <Button variant="outline" onClick={() => signIn()}>
-          Sign In
-        </Button>
-      ) : null}
     <DropdownMenu>
       <DropdownMenuTrigger>
         <UserAvatar
@@ -35,6 +36,5 @@ export default function UserButton({ session }: { session: Session | null }) {
         <DropdownMenuItem onClick={(event: React.MouseEvent) => signOut()}>Sign Out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-    </>
   );
 }
