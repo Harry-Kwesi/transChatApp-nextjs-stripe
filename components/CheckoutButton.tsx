@@ -17,7 +17,7 @@ const [loading, setLoading] = useState(false)
 
       const docRef = await addDoc(
         collection(db, 'customers', session.user.id, 'checkout_sessions'), {
-        price:'price_1OgiwJSAwBBmWXf8acP3A6Hy',
+        price:'price_1QsJYzSAwBBmWXf8AU3I9tZX',
         success_url: window.location.origin,
         cancel_url: window.location.origin
       })
@@ -26,8 +26,6 @@ const [loading, setLoading] = useState(false)
         const data = snap.data();
         const url = data?.url
         const error = data?.error;
-
-
         if (error){
           // show an error to customer
           // inspect your cloud function logs in your firebase console
