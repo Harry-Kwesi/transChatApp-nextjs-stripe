@@ -11,29 +11,104 @@ import UserAvatar from "./UserAvatar";
 import { Session } from "next-auth";
 import { Button } from "./ui/button";
 import { signIn, signOut } from "next-auth/react";
+import { useSubscriptionStore } from "@/store/store";
+import LoadingSpinner from "./LoadingSpinner";
+import { StarIcon } from "lucide-react";
+
+
+// export default function UserButton({ session }: { session: Session | null }) {
+//       const subscription = useSubscriptionStore((state) => state.subscription);
+
+      
+//       console.log("Subscription State:", subscription);
+
+//       if (!session) {
+//         return (
+//           <Button variant="outline" onClick={() => signIn()}>
+//             Sign In
+//           </Button>
+//         );
+//       }
+    
+//   return (
+//     <DropdownMenu>
+//       <DropdownMenuTrigger>
+//         <UserAvatar
+//           name={session?.user?.name}
+//           image={session?.user?.image}
+//           className={""}
+//         />
+//       </DropdownMenuTrigger>
+//       <DropdownMenuContent>
+//         <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
+//         <DropdownMenuSeparator />
+
+//        {subscription === undefined &&(
+//           <DropdownMenuItem>
+//             <LoadingSpinner/>
+//           </DropdownMenuItem>
+//        )}
+
+//         {subscription?.role === "pro" && (
+//           <DropdownMenuLabel className="text-xs flex items-center justify-center space-x-1 text-[#E935C1] animate-pulse">
+//             <StarIcon className="w-4 h-4 fill-[#E935C1]" />
+//             <span>PRO</span>
+//           </DropdownMenuLabel>
+//         )}
+
+
+//          <DropdownMenuSeparator />
+//          <DropdownMenuItem>Manage</DropdownMenuItem>
+
+//         <DropdownMenuItem onClick={(event: React.MouseEvent) => signOut()}>Sign Out</DropdownMenuItem>
+//       </DropdownMenuContent>
+//     </DropdownMenu>
+//   );
+// }
 
 export default function UserButton({ session }: { session: Session | null }) {
-      if (!session) {
-        return (
-          <Button variant="outline" onClick={() => signIn()}>
-            Sign In
-          </Button>
-        );
-      }
-    
+  const subscription = useSubscriptionStore((state) => state.subscription);
+
+  if (!session) {
+    return (
+      <Button variant="outline" onClick={() => signIn()}>
+        Sign In
+      </Button>
+    );
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <UserAvatar
           name={session?.user?.name}
           image={session?.user?.image}
-          className={""}
+          className=""
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={(event: React.MouseEvent) => signOut()}>Sign Out</DropdownMenuItem>
+
+        {/* Show Loading Spinner while fetching subscription */}
+        {subscription === undefined && (
+          <DropdownMenuItem>
+            <LoadingSpinner /> {/* Ensure this component exists */}
+          </DropdownMenuItem>
+        )}
+
+        {/* Show "PRO" Badge if user has a Pro Subscription */}
+        {subscription?.role === "pro" && (
+          <DropdownMenuLabel className="text-xs flex items-center justify-center space-x-1 text-[#E935C1] animate-pulse">
+            <StarIcon className="w-4 h-4 fill-[#E935C1]" />
+            <span>PRO</span>
+          </DropdownMenuLabel>
+        )}
+
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Manage</DropdownMenuItem>
+
+        <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

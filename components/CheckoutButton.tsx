@@ -18,7 +18,7 @@ const [loading, setLoading] = useState(false)
 
       const docRef = await addDoc(
         collection(db, 'customers', session.user.id, 'checkout_sessions'), {
-        price:'price_1QsJYzSAwBBmWXf8AU3I9tZX',
+        price:'price_1OgiwJSAwBBmWXf8acP3A6Hy',
         success_url: window.location.origin,
         cancel_url: window.location.origin
       })
