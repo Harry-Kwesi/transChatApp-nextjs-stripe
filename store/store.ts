@@ -31,15 +31,9 @@ interface SubscriptionState {
 }
 
 
-// export const useSubscriptionStore = create<SubscriptionState>((set) => ({
-//     subscription: undefined,
-//     setSubscription: (subscription: Subscription | null) => set({ subscription }),
-// }));
-
 export const useSubscriptionStore = create<SubscriptionState>((set) => ({
     subscription: undefined,
-    setSubscription: (subscription: Subscription | null) => {
-        console.log("Updating Subscription State:", subscription);
-        set({ subscription });
-    },
+    setSubscription: (subscription: Subscription | null) => set({ subscription }),
 }));
+
+

@@ -28,7 +28,6 @@ const subscriptionConverter: FirestoreDataConverter<Subscription> = {
         options: SnapshotOptions
     ): Subscription {
         const data = snapshot.data(options)!;
-        console.log("subscription", data.metadata);
         return {
         id: snapshot.id,
         metadata: data.metadata,
