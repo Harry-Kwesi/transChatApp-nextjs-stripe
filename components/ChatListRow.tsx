@@ -6,6 +6,7 @@ import { Message, limitedSortedMessagesRef } from "@/lib/converters/Message";
 import { useRouter } from "next/navigation";
 import UserAvatar from "./UserAvatar";
 import { useSession } from "next-auth/react";
+import { useLanguageStore } from "@/store/store";
 
 
 
@@ -14,16 +15,18 @@ function ChatListRow({chatId}:{chatId:string}) {
     const [messages, loading, error] = useCollectionData<Message>(
         limitedSortedMessagesRef(chatId)
     )
+    const language = useLanguageStore(state => state.language)
     const {data: session} = useSession()
 
     function prettyUUID(n = 4){
         return chatId.substring(0,n)
+
     }
 
     const row = (message?: Message) => (
        <div
        key={chatId}
-      //  onClick={() => router.push(`/chat/${chatId}`)}
+        onClick={() => router.push(`/chat/${chatId}`)}
        className="flex  p-5 items-center space-x-2 cursor-pointer hover:bg-gray-100 dark-hover:bg-slate-700"
        >
 
@@ -41,7 +44,7 @@ function ChatListRow({chatId}:{chatId:string}) {
          }
         </p>
         <p className="text-gray-400 line-clamp-1">
-           {message?.translated?.["en"] || "Get the conversation started"}
+           {message?.translated?.[language] || "Get the conversation started"}
         </p>
         
         <div className="text-xs text-gray-400 text-right">
@@ -51,9 +54,10 @@ function ChatListRow({chatId}:{chatId:string}) {
              : "No Messages yet"
            }
          </p>
+         <p>chat  #{prettyUUID()}</p>
         </div>
 
-        <p>chat  #{prettyUUID()}</p>
+        
         </div>
        </div>
     );
