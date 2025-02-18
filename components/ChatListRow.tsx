@@ -23,7 +23,7 @@ function ChatListRow({chatId}:{chatId:string}) {
     const row = (message?: Message) => (
        <div
        key={chatId}
-       onClick={() => router.push(`/chat/${chatId}`)}
+      //  onClick={() => router.push(`/chat/${chatId}`)}
        className="flex  p-5 items-center space-x-2 cursor-pointer hover:bg-gray-100 dark-hover:bg-slate-700"
        >
 
