@@ -1,20 +1,24 @@
 import ChatList from "@/components/ChatList";
-
+import ChatPermissionError from "@/components/ChatPermissionError";
 
 type Props = {
-    params: {};
-    searchParams: {
-         error: string;
-        };
-     };
- 
+  params: {};
+  searchParams: {
+    error?: string; // Make it optional to prevent undefined errors
+  };
+};
 
-function ChatsPage({ searchParams:error }: Props) {
+function ChatsPage({ searchParams }: Props) {
   return (
     <div>
-        <ChatList/>
+      {searchParams.error && ( 
+        <div className="text-red-500">
+          <ChatPermissionError />
+        </div>
+      )}
+      <ChatList />
     </div>
-  )
+  );
 }
 
 export default ChatsPage;
